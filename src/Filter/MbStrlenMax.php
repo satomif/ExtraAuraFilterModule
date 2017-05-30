@@ -5,7 +5,7 @@ class MbStrlenMax
 {
     const NAME = 'mbStrlenMax';
 
-    /*
+    /**
      * multi byte string length
      */
     public function __invoke($subject, $field, $max = null)

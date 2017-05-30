@@ -11,7 +11,6 @@ class AuraFilterProvider implements ProviderInterface
     private $validateFilter;
 
     /**
-     * @Inject
      * @ValidationParameters
      *
      * @param array $validateFilter

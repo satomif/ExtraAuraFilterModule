@@ -9,13 +9,11 @@ use Satomif\ExtraAuraFilterModule\Annotation\ValidationParameters;
 
 class AuraFilterModule extends AbstractModule
 {
+    /**
+     * @var array
+     */
     private $validateConfig;
 
-    /**
-     * AuraFilterModule constructor.
-     *
-     * @param AbstractModule $validateConfig
-     */
     public function __construct(array $validateConfig, AbstractModule $module = null)
     {
         if (! empty($validateConfig)) {
