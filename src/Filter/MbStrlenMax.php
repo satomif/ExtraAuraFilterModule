@@ -8,8 +8,6 @@ namespace Satomif\ExtraAuraFilterModule\Filter;
 
 class MbStrlenMax
 {
-    const NAME = 'mbStrlenMax';
-
     /**
      * multi byte string length
      */

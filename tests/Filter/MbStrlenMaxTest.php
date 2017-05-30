@@ -23,7 +23,7 @@ class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $validate_factories = [
-            MbStrlenMax::NAME => function () {
+            'mbstrlen-max' => function () {
                 return new MbStrlenMax;
             },
         ];
@@ -37,7 +37,7 @@ class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
     public function testMbStrlenMaxOk()
     {
         $mbString = 'こんにちは！世界！';
-        $this->filter->validate('var_name')->is(MbStrlenMax::NAME, 9);
+        $this->filter->validate('var_name')->is('mbstrlen-max', 9);
         $data = ['var_name' => $mbString];
         $success = $this->filter->apply($data);
         $this->assertTrue($success);
@@ -52,12 +52,12 @@ class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
     public function testMbStrlenMaxNg()
     {
         $mbString = 'こんにちは！世界2！';
-        $this->filter->validate('var_name')->is(MbStrlenMax::NAME, 9);
+        $this->filter->validate('var_name')->is('mbstrlen-max', 9);
         $data = ['var_name' => $mbString];
         $fail = $this->filter->apply($data);
         $this->assertFalse($fail);
         $errorMsg = new ErrorString($this->filter);
         $msgs = (string) $errorMsg;
-        $this->assertSame('var_name should have validated as mbStrlenMax(9)', $msgs);
+        $this->assertSame('var_name should have validated as mbstrlen-max(9)', $msgs);
     }
 }
