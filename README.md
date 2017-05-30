@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/satomif/ExtraAuraFilterModule.svg?branch=2.x)](https://travis-ci.org/satomif/ExtraAuraFilterModule)
+[![Build Status](https://travis-ci.org/satomif/ExtraAuraFilterModule.svg?branch=feature-2.x)](https://travis-ci.org/satomif/ExtraAuraFilterModule)
 
 # ExtraAuraFilterModule
 https://github.com/auraphp/Aura.Filter/blob/2.x/docs/custom.md
