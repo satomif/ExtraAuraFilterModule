@@ -25,8 +25,7 @@ class AuraFilterProvider implements ProviderInterface
     public function get()
     {
         $filterFactory = new FilterFactory($this->validateFilter);
-        $filter = $filterFactory->newSubjectFilter();
-
-        return $filter;
+        
+        return $filterFactory->newSubjectFilter();
     }
 }
