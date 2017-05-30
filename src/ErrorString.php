@@ -28,7 +28,7 @@ final class ErrorString
         foreach ($msgs as $val) {
             $text[] = $val[0];
         }
-        $msgs = implode("\n", $text);
+        $msgs = implode(PHP_EOL, $text);
 
         return (string) $msgs;
     }
