@@ -14,7 +14,7 @@ class AuraFilterProvider implements ProviderInterface
      *
      * @param array $validateFilter
      */
-    public function __construct($validateFilter = [])
+    public function __construct(array $validateFilter = [])
     {
         $this->validateFilter = $validateFilter;
     }
