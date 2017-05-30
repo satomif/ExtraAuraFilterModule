@@ -16,7 +16,7 @@ class AuraFilterModule extends AbstractModule
      *
      * @param AbstractModule $validateConfig
      */
-    public function __construct($validateConfig, AbstractModule $module = null)
+    public function __construct(array $validateConfig, AbstractModule $module = null)
     {
         if (! empty($validateConfig)) {
             foreach ($validateConfig as $key => $value) {
