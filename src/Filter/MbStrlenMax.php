@@ -10,6 +10,8 @@ class MbStrlenMax
 {
     /**
      * multi byte string length
+     *
+     * @return bool
      */
     public function __invoke($subject, $field, $max = null)
     {
