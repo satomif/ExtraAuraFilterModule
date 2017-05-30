@@ -10,7 +10,7 @@ use Aura\Filter\SubjectFilter;
 use Ray\Di\AbstractModule;
 use Ray\Di\Exception\Unbound;
 use Ray\Validation\ValidateModule;
-use Satomif\ExtraAuraFilterModule\Annotation\ValidationParameters;
+use Satomif\ExtraAuraFilterModule\Annotation\ValidationFilters;
 
 class AuraFilterModule extends AbstractModule
 {
@@ -40,7 +40,7 @@ class AuraFilterModule extends AbstractModule
     {
         $this->install(new ValidateModule());
         if ($this->validateConfig) {
-            $this->bind()->annotatedWith(ValidationParameters::class)->toInstance($this->validateConfig);
+            $this->bind()->annotatedWith(ValidationFilters::class)->toInstance($this->validateConfig);
             $this->bind(SubjectFilter::class)->toProvider(AuraFilterProvider::class);
         }
     }

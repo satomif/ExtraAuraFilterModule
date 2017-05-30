@@ -13,7 +13,7 @@ use Ray\Di\Di\Qualifier;
  * @Target("METHOD")
  * @Qualifier
  */
-final class ValidationParameters
+final class ValidationFilters
 {
     /**
      * @var array
