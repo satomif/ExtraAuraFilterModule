@@ -2,11 +2,16 @@
 namespace Satomif\ExtraAuraFilterModule;
 
 use Aura\Filter\FilterFactory;
+use Aura\Filter\SubjectFilter;
 use Satomif\ExtraAuraFilterModule\Filter\MbStrlenMax;
 
 class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
 {
     use ValidationInject;
+
+    /**
+     * @var SubjectFilter
+     */
     private $filter;
 
     /**
