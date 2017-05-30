@@ -16,17 +16,15 @@ class AuraFilterModule extends AbstractModule
 
     public function __construct(array $validateConfig, AbstractModule $module = null)
     {
-        if (! empty($validateConfig)) {
-            foreach ($validateConfig as $key => $value) {
-                if (! class_exists($value)) {
-                    throw new Unbound($value . ' is not found.');
-                }
-                $validateConfig[$key] = function () use ($value) {
-                    new $value;
-                };
+        foreach ($validateConfig as $key => $value) {
+            if (! class_exists($value)) {
+                throw new Unbound($value . ' is not found.');
             }
-            $this->validateConfig = $validateConfig;
+            $validateConfig[$key] = function () use ($value) {
+                new $value;
+            };
         }
+        $this->validateConfig = $validateConfig;
         parent::__construct($module);
     }
 
