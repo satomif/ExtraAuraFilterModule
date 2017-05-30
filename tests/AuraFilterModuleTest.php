@@ -1,8 +1,6 @@
 <?php
 namespace Satomif\ExtraAuraFilterModule;
 
-namespace Satomif\ExtraAuraFilterModule;
-
 use Aura\Filter\SubjectFilter;
 use PHPUnit\Framework\TestCase;
 use Ray\Di\Injector;
