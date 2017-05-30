@@ -2,7 +2,6 @@
 namespace Satomif\ExtraAuraFilterModule;
 
 use Aura\Filter\FilterFactory;
-use Ray\Di\Di\Inject;
 use Ray\Di\ProviderInterface;
 use Satomif\ExtraAuraFilterModule\Annotation\ValidationParameters;
 
