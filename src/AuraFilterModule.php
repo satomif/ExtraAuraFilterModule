@@ -34,8 +34,8 @@ class AuraFilterModule extends AbstractModule
     protected function configure()
     {
         $this->install(new ValidateModule());
-        if (! empty($this->validate_config)) {
-            $this->bind(ValidationParameters::class)->toInstance($this->validate_config);
+        if ($this->validateConfig) {
+            $this->bind(ValidationParameters::class)->toInstance($this->validateConfig);
             $this->bind(SubjectFilter::class)->toProvider(AuraFilterProvider::class);
         }
     }
