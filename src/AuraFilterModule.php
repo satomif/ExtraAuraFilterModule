@@ -35,7 +35,7 @@ class AuraFilterModule extends AbstractModule
     {
         $this->install(new ValidateModule());
         if ($this->validateConfig) {
-            $this->bind(ValidationParameters::class)->toInstance($this->validateConfig);
+            $this->bind()->annotatedWith(ValidationParameters::class)->toInstance($this->validateConfig);
             $this->bind(SubjectFilter::class)->toProvider(AuraFilterProvider::class);
         }
     }
