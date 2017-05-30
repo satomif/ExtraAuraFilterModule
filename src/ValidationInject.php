@@ -17,7 +17,7 @@ trait ValidationInject
     private $filter;
 
     /**
-     * @var
+     * @var ErrorString
      */
     private $errorMesssages;
 
