@@ -2,7 +2,7 @@
     "name": "satomif/extra-aura-filter-module",
     "type": "project",
     "description": "Aura filter 2.x additional custom rule module",
-    "license": "proprietary",
+    "license": "MIT",
     "homepage": "https://github.com/satomif/ExtraAuraFilterModule",
     "require": {
         "php": ">=5.6.0",
