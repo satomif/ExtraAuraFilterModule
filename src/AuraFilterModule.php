@@ -18,7 +18,7 @@ class AuraFilterModule extends AbstractModule
     {
         foreach ($validateConfig as $key => $value) {
             if (! class_exists($value)) {
-                throw new Unbound($value . ' is not found.');
+                throw new Unbound($value);
             }
             $validateConfig[$key] = function () use ($value) {
                 new $value;
