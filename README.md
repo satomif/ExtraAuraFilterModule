@@ -29,10 +29,9 @@ use ValidationInject;
 $mbString = 'こんにちは！世界2！';
 $this->filter->validate('var_name')->is('mbstrlen-max', 9);
 $data = ['var_name' => $mbString];
-$success = $this->filter->apply($data);
-if (! $success) {
-  $errorMsg = new ErrorString($this->filter);
-  $msgs = (string) $errorMsg;
+$fail = $this->filter->apply($data);
+if (! $fail) {
+  $msgs = (string) $this->errorString;
 }
 ```
 
