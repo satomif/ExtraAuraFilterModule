@@ -10,7 +10,7 @@ https://github.com/auraphp/Aura.Filter/blob/2.x/docs/custom.md
 ```
 $config = require dirname(dirname(__DIR__)) . '/var/conf/validate.php';
 
-$this->install(new ExtraAuraFilterModule($config));
+$this->install(new AuraFilterModule($config));
 ```
 
 ## config(validate.php)
