@@ -1,35 +1,36 @@
 <?php
+/**
+ * This file is part of the Satomi.ExtraAuraFilterModule package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace Satomif\ExtraAuraFilterModule;
 
 use Aura\Filter\SubjectFilter;
 use Ray\Di\AbstractModule;
 use Ray\Di\Exception\Unbound;
 use Ray\Validation\ValidateModule;
-use Satomif\ExtraAuraFilterModule\Annotation\ValidationParameters;
+use Satomif\ExtraAuraFilterModule\Annotation\ValidationFilters;
 
 class AuraFilterModule extends AbstractModule
 {
+    /**
+     * @var array
+     */
     private $validateConfig;
 
-    /**
-     * AuraFilterModule constructor.
-     *
-     * @param AbstractModule $validateConfig
-     */
-    public function __construct($validateConfig)
+    public function __construct(array $validateConfig, AbstractModule $module = null)
     {
-        if (! empty($validateConfig)) {
-            foreach ($validateConfig as $key => $value) {
-                if (! class_exists($value)) {
-                    throw new Unbound($value . ' is not found.');
-                }
-                $validateConfig[$key] = function () use ($value) {
-                    new $value;
-                };
+        foreach ($validateConfig as $key => $value) {
+            if (! class_exists($value)) {
+                throw new Unbound($value);
             }
-            $this->validateConfig = $validateConfig;
+            $validateConfig[$key] = function () use ($value) {
+                new $value;
+            };
         }
-        parent::__construct();
+        $this->validateConfig = $validateConfig;
+        parent::__construct($module);
     }
 
     /**
@@ -38,8 +39,8 @@ class AuraFilterModule extends AbstractModule
     protected function configure()
     {
         $this->install(new ValidateModule());
-        if (! empty($this->validate_config)) {
-            $this->bind(ValidationParameters::class)->toInstance($this->validate_config);
+        if ($this->validateConfig) {
+            $this->bind()->annotatedWith(ValidationFilters::class)->toInstance($this->validateConfig);
             $this->bind(SubjectFilter::class)->toProvider(AuraFilterProvider::class);
         }
     }

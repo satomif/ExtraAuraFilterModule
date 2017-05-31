@@ -1,4 +1,9 @@
 <?php
+/**
+ * This file is part of the Satomi.ExtraAuraFilterModule package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace Satomif\ExtraAuraFilterModule\Annotation;
 
 use Ray\Di\Di\Qualifier;
@@ -8,7 +13,7 @@ use Ray\Di\Di\Qualifier;
  * @Target("METHOD")
  * @Qualifier
  */
-final class ValidationParameters
+final class ValidationFilters
 {
     /**
      * @var array

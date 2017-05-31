@@ -1,24 +1,27 @@
 <?php
+/**
+ * This file is part of the Satomi.ExtraAuraFilterModule package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace Satomif\ExtraAuraFilterModule;
 
 use Aura\Filter\FilterFactory;
-use Ray\Di\Di\Inject;
 use Ray\Di\ProviderInterface;
-use Satomif\ExtraAuraFilterModule\Annotation\ValidationParameters;
+use Satomif\ExtraAuraFilterModule\Annotation\ValidationFilters;
 
 class AuraFilterProvider implements ProviderInterface
 {
-    private $validateFilter;
+    private $validateFilters;
 
     /**
-     * @Inject
-     * @ValidationParameters
+     * @ValidationFilters
      *
-     * @param array $validateFilter
+     * @param array $validateFilters
      */
-    public function __construct($validateFilter = [])
+    public function __construct(array $validateFilters = [])
     {
-        $this->validateFilter = $validateFilter;
+        $this->validateFilters = $validateFilters;
     }
 
     /**
@@ -26,9 +29,6 @@ class AuraFilterProvider implements ProviderInterface
      */
     public function get()
     {
-        $filterFactory = new FilterFactory($this->validateFilter);
-        $filter = $filterFactory->newSubjectFilter();
-
-        return $filter;
+        return (new FilterFactory($this->validateFilters))->newSubjectFilter();
     }
 }

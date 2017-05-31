@@ -1,12 +1,20 @@
 <?php
+/**
+ * This file is part of the Satomi.ExtraAuraFilterModule package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace Satomif\ExtraAuraFilterModule;
 
 use Aura\Filter\FilterFactory;
+use Aura\Filter\SubjectFilter;
 use Satomif\ExtraAuraFilterModule\Filter\MbStrlenMax;
 
 class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
 {
-    use ValidationInject;
+    /**
+     * @var SubjectFilter
+     */
     private $filter;
 
     /**
@@ -15,7 +23,7 @@ class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $validate_factories = [
-            MbStrlenMax::NAME => function () {
+            'mbstrlen-max' => function () {
                 return new MbStrlenMax;
             },
         ];
@@ -29,10 +37,13 @@ class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
     public function testMbStrlenMaxOk()
     {
         $mbString = 'こんにちは！世界！';
-        $this->filter->validate('check_string')->is(MbStrlenMax::NAME, 9);
-        $data = ['check_string' => $mbString];
+        $this->filter->validate('var_name')->is('mbstrlen-max', 9);
+        $data = ['var_name' => $mbString];
         $success = $this->filter->apply($data);
         $this->assertTrue($success);
+        $errorMsg = new ErrorString($this->filter);
+        $msgs = (string) $errorMsg;
+        $this->assertSame('', $msgs);
     }
 
     /**
@@ -41,11 +52,12 @@ class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
     public function testMbStrlenMaxNg()
     {
         $mbString = 'こんにちは！世界2！';
-        $this->filter->validate('check_string')->is(MbStrlenMax::NAME, 9);
-        $data = ['check_string' => $mbString];
+        $this->filter->validate('var_name')->is('mbstrlen-max', 9);
+        $data = ['var_name' => $mbString];
         $fail = $this->filter->apply($data);
         $this->assertFalse($fail);
-        $msgs = $this->getStringErrorMessage($this->filter);
-        $this->assertSame('check_string should have validated as mbStrlenMax(9)', $msgs);
+        $errorMsg = new ErrorString($this->filter);
+        $msgs = (string) $errorMsg;
+        $this->assertSame('var_name should have validated as mbstrlen-max(9)', $msgs);
     }
 }

@@ -1,5 +1,9 @@
 <?php
-$header = '';
+$header = <<<'EOF'
+This file is part of the Satomi.ExtraAuraFilterModule package.
+
+@license http://opensource.org/licenses/MIT MIT
+EOF;
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
     ->setRules(array(

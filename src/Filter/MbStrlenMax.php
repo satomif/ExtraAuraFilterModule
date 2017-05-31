@@ -1,12 +1,17 @@
 <?php
+/**
+ * This file is part of the Satomi.ExtraAuraFilterModule package.
+ *
+ * @license http://opensource.org/licenses/MIT MIT
+ */
 namespace Satomif\ExtraAuraFilterModule\Filter;
 
 class MbStrlenMax
 {
-    const NAME = 'mbStrlenMax';
-
-    /*
+    /**
      * multi byte string length
+     *
+     * @return bool
      */
     public function __invoke($subject, $field, $max = null)
     {
