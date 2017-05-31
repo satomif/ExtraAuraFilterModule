@@ -8,11 +8,10 @@ namespace Satomif\ExtraAuraFilterModule;
 
 use Aura\Filter\SubjectFilter;
 use Ray\Di\AbstractModule;
-use Ray\Di\Exception\Unbound;
 use Ray\Validation\ValidateModule;
 use Satomif\ExtraAuraFilterModule\Annotation\ValidationFilters;
 
-class AuraFilterModule extends AbstractModule
+class ExtraAuraFilterModule extends AbstractModule
 {
     /**
      * @var array
@@ -21,14 +20,6 @@ class AuraFilterModule extends AbstractModule
 
     public function __construct(array $validateConfig, AbstractModule $module = null)
     {
-        foreach ($validateConfig as $key => $value) {
-            if (! class_exists($value)) {
-                throw new Unbound($value);
-            }
-            $validateConfig[$key] = function () use ($value) {
-                new $value;
-            };
-        }
         $this->validateConfig = $validateConfig;
         parent::__construct($module);
     }
@@ -41,7 +32,7 @@ class AuraFilterModule extends AbstractModule
         $this->install(new ValidateModule());
         if ($this->validateConfig) {
             $this->bind()->annotatedWith(ValidationFilters::class)->toInstance($this->validateConfig);
-            $this->bind(SubjectFilter::class)->toProvider(AuraFilterProvider::class);
+            $this->bind(SubjectFilter::class)->toProvider(ExtraAuraFilterProvider::class);
         }
     }
 }
