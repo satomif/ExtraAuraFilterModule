@@ -18,7 +18,7 @@ class MbStrlenMaxTest extends \PHPUnit_Framework_TestCase
     private $filter;
 
     /**
-     * @var $errorString
+     * @var ErrorString
      */
     private $errorString;
 
