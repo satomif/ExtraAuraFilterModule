@@ -7,10 +7,11 @@
 namespace Satomif\ExtraAuraFilterModule;
 
 use Aura\Filter\FilterFactory;
+use Ray\Di\Exception\Unbound;
 use Ray\Di\ProviderInterface;
 use Satomif\ExtraAuraFilterModule\Annotation\ValidationFilters;
 
-class AuraFilterProvider implements ProviderInterface
+class ExtraAuraFilterProvider implements ProviderInterface
 {
     private $validateFilters;
 
@@ -21,7 +22,16 @@ class AuraFilterProvider implements ProviderInterface
      */
     public function __construct(array $validateFilters = [])
     {
-        $this->validateFilters = $validateFilters;
+        $validateFiltersObj = [];
+        foreach ($validateFilters as $key => $value) {
+            if (! class_exists($value)) {
+                throw new Unbound($value);
+            }
+            $validateFiltersObj[$key] = function () use ($value) {
+                new $value;
+            };
+        }
+        $this->validateFilters = $validateFiltersObj;
     }
 
     /**

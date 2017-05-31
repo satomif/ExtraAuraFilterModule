@@ -16,7 +16,7 @@ class AuraFilterModuleTest extends TestCase
     public function testModule()
     {
         $config = ['mbstrlen-max' => MbStrlenMax::class];
-        $subjectFilter = (new Injector(new AuraFilterModule($config)))->getInstance(SubjectFilter::class);
+        $subjectFilter = (new Injector(new ExtraAuraFilterModule($config)))->getInstance(SubjectFilter::class);
         $this->assertInstanceOf(SubjectFilter::class, $subjectFilter);
     }
 }
