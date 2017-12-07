@@ -28,7 +28,7 @@ class ExtraAuraFilterProvider implements ProviderInterface
                 throw new Unbound($value);
             }
             $validateFiltersObj[$key] = function () use ($value) {
-                new $value;
+                return new $value;
             };
         }
         $this->validateFilters = $validateFiltersObj;
