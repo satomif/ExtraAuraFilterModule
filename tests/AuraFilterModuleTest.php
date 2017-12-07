@@ -13,10 +13,26 @@ use Satomif\ExtraAuraFilterModule\Filter\MbStrlenMax;
 
 class AuraFilterModuleTest extends TestCase
 {
-    public function testModule()
+    /**
+     * @var SubjectFilter
+     */
+    private $subjectFilter;
+
+    protected function setUp()
     {
         $config = ['mbstrlen-max' => MbStrlenMax::class];
-        $subjectFilter = (new Injector(new ExtraAuraFilterModule($config)))->getInstance(SubjectFilter::class);
-        $this->assertInstanceOf(SubjectFilter::class, $subjectFilter);
+        $this->subjectFilter = (new Injector(new ExtraAuraFilterModule($config)))->getInstance(SubjectFilter::class);
+    }
+
+    public function testModule()
+    {
+        $this->assertInstanceOf(SubjectFilter::class, $this->subjectFilter);
+    }
+
+    public function testSubjectFilterApplyReturnsBoolean()
+    {
+        $subject = ['foo' => 'bar'];
+        $this->subjectFilter->validate('foo')->is('mbstrlen-max', 10);
+        $this->assertInternalType('boolean', $this->subjectFilter->apply($subject));
     }
 }
