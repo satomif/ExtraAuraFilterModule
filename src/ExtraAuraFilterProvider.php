@@ -22,16 +22,16 @@ class ExtraAuraFilterProvider implements ProviderInterface
      */
     public function __construct(array $validateFilters = [])
     {
-        $validateFiltersObj = [];
+        $factories = [];
         foreach ($validateFilters as $key => $value) {
             if (! class_exists($value)) {
                 throw new Unbound($value);
             }
-            $validateFiltersObj[$key] = function () use ($value) {
-                new $value;
+            $factories[$key] = function () use ($value) {
+                return new $value;
             };
         }
-        $this->validateFilters = $validateFiltersObj;
+        $this->validateFilters = $factories;
     }
 
     /**
